@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 1 | Hello, Audio</title>
+</head>
+<body>
+<button id="start1">Start</button>
+<button id="stop1">Stop</button>
+<button id="start2">Start</button>
+<button id="stop2">Stop</button>
+    <script>
+        //Complete Lab 1 here:
+        //NOTE: your audio context needs to be stored in a variable called ctx
+    const ctx = new AudioContext()
+
+    
+    
+    const myGain = new GainNode(ctx);
+        myGain.gain.value = 0.125;
+
+        //connect nodes 
+        
+        myGain.connect(ctx.destination);
+
+        //start my nodes
+        
+
+        //Do not edit the code below here
+        //query selectro uses CSS selectors to select elements from the DOM https://www.w3schools.com/css/css_selectors.asp
+        document.querySelector("#start1").onclick = () => {
+            //code that runs when i click the start button
+            ctx.resume();
+            osc1 = new OscillatorNode (ctx)
+            osc1.frequency.value = 110
+            osc1.type = "sawtooth"
+        
+
+            osc2 = new OscillatorNode (ctx)
+            osc2.frequency.value = 110*(4.1)
+            
+            osc1.connect(myGain)
+            osc2.connect(myGain)
+            
+            osc1.start()
+            osc2.start()
+        }
+        document.querySelector("#stop1").onclick = () => {
+            //code that runs when i click the stop button
+            osc1.stop()
+            osc2.stop()
+        }
+
+         document.querySelector("#start2").onclick = () => {
+            //code that runs when i click the start button
+            ctx.resume();
+            osc3 = new OscillatorNode (ctx)
+            osc3.frequency.value = 465
+            osc3.type = "triangle"
+        
+
+            osc4 = new OscillatorNode (ctx)
+            osc4.frequency.value = 465*(4.1)
+            
+            osc3.connect(myGain)
+            osc4.connect(myGain)
+            
+            osc3.start()
+            osc4.start()
+        }
+        document.querySelector("#stop2").onclick = () => {
+            //code that runs when i click the stop button
+            osc3.stop()
+            osc4.stop()
+        }
+
+        
+    </script>
+</body>
+</html>
